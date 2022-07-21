@@ -1,0 +1,33 @@
+---
+kind: pipeline
+type: kubernetes
+name: default
+
+steps:
+
+  - name: test
+    image: golang:1.12
+    commands:
+      - "go test"
+
+  - name: build
+    image: golang:1.12
+    commands:
+      - "go build -o ./app"
+
+  - name: publish
+    image: plugins/docker
+    settings:
+      repo: juouyang/k8scicd
+      tags: [ "${DRONE_COMMIT_SHA:0:7}","latest" ]
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+
+  - name: deploy
+    image: juouyang/drone-kubectl:v1.23.3
+    settings:
+      target_image: juouyang/k8scicd:${DRONE_COMMIT_SHA:0:7}
+    commands:
+      - envsubst < deploy.yml | kubectl apply -f -
