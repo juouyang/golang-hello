@@ -1,5 +1,5 @@
-FROM golang:1.21.4-alpine3.18 AS build-env
-RUN mkdir /go/src/app && apk update && apk add git
+FROM golang:1.21.4-bookworm AS build-env
+RUN mkdir /go/src/app && apt update && apt install git
 ADD main.go /go/src/app/
 WORKDIR /go/src/app
 RUN go mod init
