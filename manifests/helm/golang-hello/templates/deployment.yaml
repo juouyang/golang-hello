@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "golang-hello.fullname" . }}-demo
+  labels:
+    app: demo
+  {{- include "golang-hello.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.demo.replicas }}
+  selector:
+    matchLabels:
+      app: demo
+    {{- include "golang-hello.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: demo
+      {{- include "golang-hello.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.demo.k8Scicd.image.repository }}:{{ .Values.demo.k8Scicd.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.demo.k8Scicd.imagePullPolicy }}
+        name: k8scicd
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+      nodeSelector: {{- toYaml .Values.demo.nodeSelector | nindent 8 }}
