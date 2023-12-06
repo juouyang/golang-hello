@@ -21,9 +21,9 @@ spec:
       - env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
-        image: {{ .Values.demo.k8Scicd.image.repository }}:{{ .Values.demo.k8Scicd.image.tag
+        image: {{ .Values.demo.k8scicd.image.repository }}:{{ .Values.demo.k8scicd.image.tag
           | default .Chart.AppVersion }}
-        imagePullPolicy: {{ .Values.demo.k8Scicd.imagePullPolicy }}
+        imagePullPolicy: {{ .Values.demo.k8scicd.imagePullPolicy }}
         name: k8scicd
         ports:
         - containerPort: 8080

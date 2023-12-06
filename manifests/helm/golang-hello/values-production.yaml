@@ -9,6 +9,6 @@ demo:
   ports:
   - port: 8080
     targetPort: 8080
-  replicas: 1
+  replicas: 3
   type: ClusterIP
 kubernetesClusterDomain: cluster.local
