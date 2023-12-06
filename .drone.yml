@@ -30,4 +30,4 @@ steps:
     settings:
       target_image: juouyang/k8scicd:${DRONE_COMMIT_SHA:0:7}
     commands:
-      - envsubst < deploy.yml | kubectl apply -f -
+      - envsubst < ./manifests/deploy.yml | kubectl apply -f -
