@@ -7,7 +7,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: argocd-demo.apps.myoci.juouyang.com
+  - host: argocd-demo.apps.k8s.juouyang.com
     http:
       paths:
       - backend:
@@ -19,4 +19,4 @@ spec:
         pathType: Exact
   tls:
   - hosts:
-    - argocd-demo.apps.myoci.juouyang.com
+    - argocd-demo.apps.k8s.juouyang.com

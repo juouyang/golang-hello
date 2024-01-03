@@ -47,7 +47,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: k8scicd.apps.myoci.juouyang.com
+  - host: k8scicd.apps.k8s.juouyang.com
     http:
       paths:
       - backend:
@@ -59,4 +59,4 @@ spec:
         pathType: Exact
   tls:
   - hosts:
-    - k8scicd.apps.myoci.juouyang.com
+    - k8scicd.apps.k8s.juouyang.com
