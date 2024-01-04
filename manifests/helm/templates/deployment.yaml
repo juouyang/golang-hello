@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "helm.fullname" . }}-myapp
+  labels:
+    app: myapp
+  {{- include "helm.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.myapp.replicas }}
+  selector:
+    matchLabels:
+      app: myapp
+    {{- include "helm.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: myapp
+      {{- include "helm.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.myapp.hello.image.repository }}:{{ .Values.myapp.hello.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.myapp.hello.imagePullPolicy }}
+        name: hello
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {{- toYaml .Values.myapp.hello.resources | nindent 10 }}
+      nodeSelector: {{- toYaml .Values.myapp.nodeSelector | nindent 8 }}

@@ -1,22 +1,22 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "golang-hello.fullname" . }}-demo
+  name: {{ include "helm.fullname" . }}-ingress
   labels:
-  {{- include "golang-hello.labels" . | nindent 4 }}
+  {{- include "helm.labels" . | nindent 4 }}
 spec:
   ingressClassName: nginx
   rules:
-  - host: argocd-demo.apps.k8s.juouyang.com
+  - host: hello.apps.k8s.juouyang.com
     http:
       paths:
       - backend:
           service:
-            name: '{{ include "golang-hello.fullname" . }}-demo'
+            name: '{{ include "helm.fullname" . }}-service'
             port:
               number: 8080
         path: /
         pathType: Exact
   tls:
   - hosts:
-    - argocd-demo.apps.k8s.juouyang.com
+    - hello.apps.k8s.juouyang.com

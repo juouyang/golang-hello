@@ -1,0 +1,19 @@
+kubernetesClusterDomain: cluster.local
+myapp:
+  hello:
+    image:
+      repository: quay.io/juouyang/golang-hello
+      tag: latest
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: 10m
+        memory: 512Mi
+  nodeSelector:
+    kubernetes.io/arch: arm64
+  replicas: 1
+service:
+  ports:
+  - port: 8080
+    targetPort: 8080
+  type: ClusterIP
