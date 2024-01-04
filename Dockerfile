@@ -1,4 +1,4 @@
-FROM golang:1.21.4-bookworm AS build-env
+FROM golang:1.21.5-bookworm AS build-env
 RUN mkdir /go/src/app && apt update && apt install git
 ADD main.go /go/src/app/
 WORKDIR /go/src/app

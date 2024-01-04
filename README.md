@@ -1,10 +1,12 @@
 # golang-hello
 
 ```
-argocd app set golang-hello --helm-set demo.k8scicd.image.tag=3c8cc43
-argocd app sync golang-hello
+helm install \
+    --namespace hello --create-namespace \
+    golang-hello manifests/helm/
 ```
 
 ```
-argocd app set golang-hello --values values-production.yaml
+helm uninstall golang-hello
+# kubectl delete ns hello
 ```
