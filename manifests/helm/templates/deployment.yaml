@@ -17,6 +17,11 @@ spec:
         app: myapp
       {{- include "helm.selectorLabels" . | nindent 8 }}
     spec:
+      tolerations:
+      - key: "cloud"
+        operator: "Equal"
+        value: "google"
+        effect: "NoSchedule"
       containers:
       - env:
         - name: KUBERNETES_CLUSTER_DOMAIN
