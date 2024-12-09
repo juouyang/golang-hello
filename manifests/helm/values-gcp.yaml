@@ -7,7 +7,7 @@ myapp:
     imagePullPolicy: IfNotPresent
     resources:
       limits:
-        cpu: 10m
+        cpu: 100m
         memory: 32Mi
   nodeSelector:
     kubernetes.io/arch: amd64

@@ -34,7 +34,7 @@ spec:
               protocol: TCP
           resources:
             limits:
-              cpu: 10m
+              cpu: 100m
               memory: 512Mi
       nodeSelector:
         kubernetes.io/arch: arm64

@@ -1,5 +1,5 @@
 FROM golang:1.21.5-bookworm AS build-env
-RUN mkdir /go/src/app && apt update && apt install git
+RUN mkdir /go/src/app && apt update && apt install -y git
 ADD main.go /go/src/app/
 WORKDIR /go/src/app
 RUN go mod init
